@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { user } from '@prisma/client';
 
 import * as nodemailer from 'nodemailer';
 
@@ -18,18 +19,18 @@ export class EmailService {
     });
   }
 
-  // async sendUserConfirmation(user: user, token: string) {
-  //   const url = `${this.config.get('SERVER_URL')}/activate/${token}`;
-  //   const emailHtml = `
-  //   <h1>Hey ${user.name},</h1>
-  //       <p>Bonjour</p>
-  //       ;`
+  async sendUserConfirmation(user: user, token: string) {
+    const url = `${this.config.get('SERVER_URL')}/activate/${token}`;
+    const emailHtml = `
+    <h1>Hey ${user.lastName} ${user.firstName},</h1>
+        <p>Bonjour</p>
+        ;`
 
-  //   await this.transporter.sendMail({
-  //     from: this.config.get('SMTP_EMAIL'),
-  //     to: user.email,
-  //     subject: `Bienvenue ${user.name} Confirmation de l'email`,
-  //     html: emailHtml,
-  //   });
-  // }
+    await this.transporter.sendMail({
+      from: this.config.get('SMTP_EMAIL'),
+      to: user.email,
+      subject: `Bienvenue ${user.email} Confirmation de l'email`,
+      html: emailHtml,
+    });
+  }
 }
