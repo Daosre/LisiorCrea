@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { EmailModule } from './email/email.module';
 import { UserModule } from './user/user.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -14,6 +15,7 @@ import { UserModule } from './user/user.module';
   PrismaModule,
   AuthModule,
   EmailModule,
-  UserModule,],
+  UserModule,
+  CategoryModule,],
 })
 export class AppModule {}
