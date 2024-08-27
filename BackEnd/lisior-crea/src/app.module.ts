@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { EmailModule } from './email/email.module';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -16,6 +17,7 @@ import { CategoryModule } from './category/category.module';
   AuthModule,
   EmailModule,
   UserModule,
-  CategoryModule,],
+  CategoryModule,
+  ProductModule,],
 })
 export class AppModule {}
