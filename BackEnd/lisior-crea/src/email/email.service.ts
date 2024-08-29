@@ -25,6 +25,7 @@ export class EmailService {
     <h1>Hey ${user.lastName} ${user.firstName},</h1>
         <p>Bonjour, vous venez de vous inscrire sur notre site Lisior Créa. Merci d'activer votre compte.</p>
         <a href='${url}'> Cliquez Ici </a>
+        <p> Si vous n'avez pas faite cette inscription, vous pouvez ignorer ce message. </p>
         ;`;
 
     await this.transporter.sendMail({
