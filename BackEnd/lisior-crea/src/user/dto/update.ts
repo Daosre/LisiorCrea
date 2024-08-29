@@ -1,10 +1,8 @@
-import { IsString } from "class-validator";
+import {IsStrongPassword, MaxLength } from "class-validator";
 
 export class updateUsersDto{
 
-    @IsString()
-    firstName: string
-
-    @IsString()
-    lastName: string
+    @IsStrongPassword()
+    @MaxLength(255)
+    password: string
 }

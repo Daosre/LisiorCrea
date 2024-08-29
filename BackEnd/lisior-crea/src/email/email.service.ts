@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { user } from '@prisma/client';
 
 import * as nodemailer from 'nodemailer';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class EmailService {
@@ -22,8 +23,8 @@ export class EmailService {
   async sendUserConfirmation(user: user, token: string) {
     const url = `${this.config.get('SERVER_URL')}/activate/${token}`;
     const emailHtml = `
-    <h1>Hey ${user.lastName} ${user.firstName},</h1>
-        <p>Bonjour, vous venez de vous inscrire sur notre site Lisior Créa. Merci d'activer votre compte.</p>
+    <h1>Bonjour ${user.lastName} ${user.firstName},</h1>
+        <p> Vous venez de vous inscrire sur notre site Lisior Créa. Merci d'activer votre compte.</p>
         <a href='${url}'> Cliquez Ici </a>
         <p> Si vous n'avez pas faite cette inscription, vous pouvez ignorer ce message. </p>
         ;`;
@@ -33,6 +34,21 @@ export class EmailService {
       to: user.email,
       subject: `Bienvenue ${user.email} Confirmation de l'email`,
       html: emailHtml,
+    });
+  }
+
+  async sendUserResetPassword(user: user, token: any) {
+    const url = `${this.config.get('SERVER_URL')}/reset/${token}`;
+    const emailHtml = `
+    <h1>Bonjour ${user.lastName} ${user.firstName},</h1>
+    <p> Vous venez de demander à réinitialiser votre mot de passe. Veuillez cliquer sur le lien ci-dessous</p>
+    <a href='${url}>Réinitialiser votre mot de passe</a> `;
+
+    await this.transporter.sendMail({
+      from: this.config.get('SMTP_EMAIL'),
+      to: user.email,
+      subject: `Réinitialisation de mot de passe`,
+      html: emailHtml
     });
   }
 }

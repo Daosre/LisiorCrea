@@ -1,6 +1,7 @@
 import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CategoryDto } from './dto';
+import { CategoryProps } from 'src/utils/type';
 
 @Injectable()
 export class CategoryService {
@@ -65,5 +66,13 @@ export class CategoryService {
 
 
     }
+  }
+
+  getCategoryById(category: CategoryProps) {
+    return this.prisma.category.findMany({
+      where: {
+        id: category.id
+      }
+    });
   }
 }

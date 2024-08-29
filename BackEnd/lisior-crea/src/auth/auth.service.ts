@@ -102,7 +102,5 @@ export class AuthService {
       throw new ForbiddenException('Invalid credentials');
     }
     return this.signToken(user.id);
-
-    // return { message: 'Bonjour' };
   }
 }
