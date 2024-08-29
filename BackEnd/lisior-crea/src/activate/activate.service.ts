@@ -33,7 +33,7 @@ export class ActivateService {
 
     return [
       'account activate',
-      res.redirect('http://localhost:3000/auth/SignIn'),
+      res.redirect('http://localhost:3001/auth/SignIn'),
     ];
   }
 }
