@@ -23,8 +23,9 @@ export class EmailService {
     const url = `${this.config.get('SERVER_URL')}/activate/${token}`;
     const emailHtml = `
     <h1>Hey ${user.lastName} ${user.firstName},</h1>
-        <p>Bonjour</p>
-        ;`
+        <p>Bonjour, vous venez de vous inscrire sur notre site Lisior Créa. Merci d'activer votre compte.</p>
+        <a href='${url}'> Cliquez Ici </a>
+        ;`;
 
     await this.transporter.sendMail({
       from: this.config.get('SMTP_EMAIL'),
