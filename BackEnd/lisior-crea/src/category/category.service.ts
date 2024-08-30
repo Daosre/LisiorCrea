@@ -58,20 +58,21 @@ export class CategoryService {
         throw new ForbiddenException("Category doesn't exist")
       }
 
-      return this.prisma.category.delete({
+      await this.prisma.category.delete({
         where: {
           id: id
         }
       })
 
+      return 'deleted'
 
     }
   }
 
-  getCategoryById(category: CategoryProps) {
+  getCategoryById(category: string) {
     return this.prisma.category.findMany({
       where: {
-        id: category.id
+        id: category
       }
     });
   }

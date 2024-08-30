@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { ActivateModule } from './activate/activate.module';
+import { ResetPasswordModule } from './reset-password/reset-password.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -20,6 +21,7 @@ import { ActivateModule } from './activate/activate.module';
   UserModule,
   CategoryModule,
   ProductModule,
-  ActivateModule,],
+  ActivateModule,
+  ResetPasswordModule,],
 })
 export class AppModule {}

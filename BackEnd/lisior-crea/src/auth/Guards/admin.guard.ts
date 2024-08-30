@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
 
     const user = request.user;
 
-    if (user && user.role && user.role.name === 'admin') {
+    if (user && user.role && user.role.name === 'Admin') {
       return true;
     } else {
       throw new ForbiddenException('Admin role required');

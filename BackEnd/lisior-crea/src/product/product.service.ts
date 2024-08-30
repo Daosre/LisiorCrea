@@ -29,16 +29,18 @@ export class ProductService {
     });
   }
 
-  async createProduct(dto: productsDto, category: CategoryProps) {
+  async createProduct(dto: productsDto) {
     await this.prisma.product.create({
       data: {
         name: dto.name,
         price: dto.price,
         description: dto.description,
-        categoryId: category.id,
+        categoryId: dto.categoryId,
         image: dto.image,
       },
     });
+
+    return {message: "Produit créé"}
   }
 
   async updateProducts(id: string, dto: productsDto) {
@@ -60,6 +62,7 @@ export class ProductService {
         ...dto,
       },
     });
+
   }
 
   async deleteProducts(id: string) {

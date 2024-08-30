@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { EmailService } from 'src/email/email.service';
@@ -54,14 +54,16 @@ export class UserService {
     });
 
     if (existingUser) {
-      const token= this.signToken
+      const token= this.passwordToken
       await this.emailService.sendUserResetPassword(existingUser, token )
+    } else {
+      throw new BadRequestException('Email non enregistré')
     }
 
     return {message: 'Email send'}
   }
 
-  async signToken(userId: string): Promise<{ access_token: string }> {
+  async passwordToken(userId: string): Promise<{ access_token: string }> {
     const payload = {
       sub: userId,
     };
